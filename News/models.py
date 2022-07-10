@@ -27,10 +27,10 @@ class Post(models.Model):
 
     article = 'AR'
     news = 'NW'
-    CHOICE_TYPE = [
+    CHOICE_TYPE = (
         (article, 'Статья'),
         (news, 'Новость')
-    ]
+    )
 
     type_post = models.CharField(max_length=2, choices=CHOICE_TYPE, default=article)
     date_creation = models.DateTimeField(auto_now_add=True)
