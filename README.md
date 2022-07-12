@@ -1,4 +1,4 @@
-Вставь данные файлы в оболочку:
+
 from News.models import *
 from Articles_and_news import art_news
 
