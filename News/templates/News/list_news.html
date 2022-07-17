@@ -1,0 +1,21 @@
+{% extends 'News/default.html' %}
+{% load custom_filters %}
+{% block title %}
+
+All news
+{% endblock title %}
+
+{% block content %}
+<h2>Количество новостей: {{ news|length }}</h2>
+<h1>Все новости:</h1>
+<hr />
+{% for i in news %}
+    Название: "{{ i.title_post | censor:'жил' }}"
+    <br />
+    Дата публикации: {{ i.date_creation| date:'d m Y' }}
+    <br />
+    Текст: {{ i.text_post | truncatechars:20 }}
+    <hr />
+{% endfor %}
+{% endblock content %}
+
