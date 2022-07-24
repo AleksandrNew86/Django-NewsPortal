@@ -7,15 +7,19 @@ All news
 {% endblock title %}
 
 {% block content %}
-<h2>Количество новостей: {{ news|length }}</h2>
-<h1>Все статьи:</h1>
+<h2>Количество статей на странице: {{ news|length }}</h2>
+<h1>Все Статьи:</h1>
+<form action="" method="get">
+    {{ filterset.form.as_p }}
+    <input type="submit" value="Search">
+</form>
 <hr />
 {% for i in news %}
-    Название: <b>"{{ i.title_post | censor:'жил' }}"</b>
+    Название: "{{ i.title_post | censor:'жил' }}"
     <br />
-    Дата публикации: <i>{{ i.date_creation| date:'d m Y' }}</i>
+    Дата публикации: {{ i.date_creation| date:'d m Y' }}
     <br />
-    Текст: <i>{{ i.text_post | truncatechars:20 }}</i>
+    Текст: {{ i.text_post | truncatechars:20 }}
     <hr />
 {% endfor %}
 {% if page_obj.has_previous %}
@@ -32,4 +36,3 @@ All news
     {% endif %}
 {% endif %}
 {% endblock content %}
-
