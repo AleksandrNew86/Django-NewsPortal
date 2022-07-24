@@ -33,10 +33,6 @@ class Category(models.Model):
 
 class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-
-    article = 'AR'
-    news = 'NW'
-
     type_post = models.CharField(max_length=2, choices=CHOICE_TYPE, default=article)
     date_creation = models.DateTimeField(auto_now_add=True)
     category_post = models.ManyToManyField(Category, through='PostCategory')

@@ -1,12 +1,11 @@
 {% extends 'News/default.html' %}
-{% load custom_filters %}
 {% block title %}
 News
 {% endblock title %}
 
 {% block content %}
-<h3>{{ news.title_post | censor:'июл' }}</h3>
+<h3>{{ news.title_post }}</h3>
 <br />
-{{ news.text_post | censor:'июл' }}
+{{ news.text_post}}
 <p align="right"><i>Дата публикации: {{ news.date_creation | date:'d.m.Y' }}</i></p>
 {% endblock content %}

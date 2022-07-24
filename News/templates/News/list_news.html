@@ -1,5 +1,4 @@
 {% extends 'News/default.html' %}
-{% load custom_filters %}
 {% load custom_tags %}
 {% block title %}
 
@@ -7,11 +6,11 @@ All news
 {% endblock title %}
 
 {% block content %}
-<h2>Количество новостей: {{ news|length }}</h2>
+<h2>Количество статей на странице: {{ news|length }}</h2>
 <h1>Все статьи:</h1>
 <hr />
 {% for i in news %}
-    Название: <b>"{{ i.title_post | censor:'жил' }}"</b>
+    Название: <b>"{{ i.title_post }}"</b>
     <br />
     Дата публикации: <i>{{ i.date_creation| date:'d m Y' }}</i>
     <br />

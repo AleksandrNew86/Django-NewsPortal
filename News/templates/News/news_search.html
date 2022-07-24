@@ -1,5 +1,4 @@
 {% extends 'News/default.html' %}
-{% load custom_filters %}
 {% load custom_tags %}
 {% block title %}
 
@@ -15,7 +14,7 @@ All news
 </form>
 <hr />
 {% for i in news %}
-    Название: "{{ i.title_post | censor:'жил' }}"
+    Название: "{{ i.title_post }}"
     <br />
     Дата публикации: {{ i.date_creation| date:'d m Y' }}
     <br />
