@@ -1,11 +1,11 @@
 from django import forms
 from .models import Post
 from django.core.validators import ValidationError
-
 forbid_words = ['нех', 'пох']
 
 
 class NewsForm(forms.ModelForm):
+
     class Meta:
         model = Post
         fields = ['author', 'category_post', 'title_post', 'text_post']
@@ -29,3 +29,5 @@ class NewsForm(forms.ModelForm):
             if i in text_post.lower():
                 raise ValidationError(f'Текст не может содержать слово {i}!')
         return clean_data
+
+

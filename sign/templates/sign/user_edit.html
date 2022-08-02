@@ -1,0 +1,22 @@
+{% extends 'News/default.html' %}
+
+{% block title %}
+User
+{% endblock title %}
+
+{% block content %}
+{% if object.pk == request.user.pk %}
+<h1>Редактирование пользователя:</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+</form>
+{% if is_not_author %}
+</br>
+<button><a href="/author/">Стать автором</a> </button>
+{% endif %}
+{% else %}
+<h2>У вас нет прав редактировать профиль данного пользователя.</h2>
+{% endif %}
+{% endblock content %}

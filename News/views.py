@@ -1,5 +1,7 @@
+
 from django.views.generic import ListView, DetailView, CreateView,\
     UpdateView, DeleteView
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import Post
 from .filters import PostFilter
 from .forms import NewsForm
@@ -38,7 +40,7 @@ class NewsSearch(ListView):
         return context
 
 
-class NewsCreate(CreateView):
+class NewsCreate(PermissionRequiredMixin, CreateView):
     form_class = NewsForm
     model = Post
     template_name = 'News/news_edit.html'
@@ -47,9 +49,10 @@ class NewsCreate(CreateView):
         post = form.save(commit=False)
         post.type_post = 'NW'
         return super().form_valid(form)
+    permission_required = 'News.add_post'
 
 
-class ArticleCreate(CreateView):
+class ArticleCreate(PermissionRequiredMixin, CreateView):
     form_class = NewsForm
     model = Post
     template_name = 'News/article_create.html'
@@ -58,15 +61,24 @@ class ArticleCreate(CreateView):
         post = form.save(commit=False)
         post.type_post = 'AR'
         return super().form_valid(form)
+    permission_required = 'News.add_post'
 
 
-class NewsEdit(UpdateView):
+class NewsEdit(PermissionRequiredMixin, UpdateView):
     form_class = NewsForm
     model = Post
     template_name = 'News/news_edit.html'
+    permission_required = 'News.change_post'
 
 
 class NewsDelete(DeleteView):
     model = Post
     template_name = 'News/news_delete.html'
     success_url = reverse_lazy("news_list")
+
+
+
+
+
+
+

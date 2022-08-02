@@ -42,6 +42,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
+                    {% if request.user.is_authenticated %}
+                        <p align="right"><button><a href="/sign/logout/">Выйти</a> </button></p>
+                    {% else %}
+                    <p align="right"><button><a href="/sign/login/">Войти</a> </button> / <button><a href="/sign/signup/">Зарегистрироваться</a> </button>
+                     / <button><a href="/accounts/login/">Вход Google</a> </button>
+                    </p>
+                    {% endif %}
                     {% block content %}
                     {{ flatpage.content }}
                     {% endblock content %}
