@@ -1,8 +1,12 @@
 from django import template
-
 register = template.Library()
 
 
 @register.filter()
-def censor(value, forbid_words):
-    return value.replace(forbid_words, f'{"*"* len(forbid_words)}')
+def get_subscribes(value):
+    subscribers = value.subscribers.all()
+    list_subscribers = []
+    for i in subscribers:
+        list_subscribers.append(i)
+    return list_subscribers
+

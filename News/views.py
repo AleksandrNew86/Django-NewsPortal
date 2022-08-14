@@ -2,10 +2,11 @@
 from django.views.generic import ListView, DetailView, CreateView,\
     UpdateView, DeleteView
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from .models import Post
+from .models import Post, Category
 from .filters import PostFilter
 from .forms import NewsForm
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 
 
 class NewsList(ListView):
@@ -20,6 +21,25 @@ class NewsDetail(DetailView):
     model = Post
     template_name = 'News/news.html'
     context_object_name = 'news'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        object_post = context['object']
+        categories = object_post.category_post.all()
+        context['categories'] = categories
+        return context
+
+    def post(self, request, *args, **kwargs):
+        if 'add_category' in request.POST:
+            category_name = request.POST['add_category']
+            category = Category.objects.get(name_category=category_name)
+            category.subscribers.add(request.user)
+        else:
+            category_name = request.POST['delete_category']
+            category = Category.objects.get(name_category=category_name)
+            category.subscribers.remove(request.user)
+        url = request.META.get('HTTP_REFERER')
+        return redirect(url)
 
 
 class NewsSearch(ListView):
@@ -44,24 +64,26 @@ class NewsCreate(PermissionRequiredMixin, CreateView):
     form_class = NewsForm
     model = Post
     template_name = 'News/news_edit.html'
+    permission_required = 'News.add_post'
 
     def form_valid(self, form):
         post = form.save(commit=False)
         post.type_post = 'NW'
         return super().form_valid(form)
-    permission_required = 'News.add_post'
+
 
 
 class ArticleCreate(PermissionRequiredMixin, CreateView):
     form_class = NewsForm
     model = Post
     template_name = 'News/article_create.html'
+    permission_required = 'News.add_post'
 
     def form_valid(self, form):
         post = form.save(commit=False)
         post.type_post = 'AR'
         return super().form_valid(form)
-    permission_required = 'News.add_post'
+
 
 
 class NewsEdit(PermissionRequiredMixin, UpdateView):
@@ -75,10 +97,3 @@ class NewsDelete(DeleteView):
     model = Post
     template_name = 'News/news_delete.html'
     success_url = reverse_lazy("news_list")
-
-
-
-
-
-
-

@@ -4,13 +4,8 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
-from .forms import RegistrationForm, UserForm
-
-
-class RegistrationView(CreateView):
-    model = User
-    form_class = RegistrationForm
-    success_url = '/news/'
+from .forms import  UserForm
+from News.models import Category, Author
 
 
 class UserUpdate(LoginRequiredMixin, UpdateView):
@@ -21,8 +16,10 @@ class UserUpdate(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['is_not_author'] = not self.request.user.groups.filter(name='author').exists()
+        context['is_not_author'] = not self.request.user.groups.filter(name='authors').exists()
+        context['subscribes'] = self.request.user.category_set.all()
         return context
+
 
 @login_required()
 def make_me_author(request):
@@ -30,4 +27,5 @@ def make_me_author(request):
     author_group = Group.objects.get(name='authors')
     if not user.groups.filter(name='authors').exists():
         author_group.user_set.add(user)
-        return redirect('/news/')
+        Author.objects.create(author=user)
+        return redirect('user_edit', request.user.pk)

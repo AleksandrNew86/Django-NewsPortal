@@ -12,8 +12,7 @@ Category.objects.create(name_category='politics')
 Category.objects.create(name_category='IT')
 Category.objects.create(name_category='cars')
 
-post1 = Post.objects.create(author=author1, type_post='AR', title_post=art_news[0]['title'],\
- text_post=art_news[0]['content'])
+post1 = Post.objects.create(author=author1, type_post='AR', title_post=art_news[0]['title'], text_post=art_news[0]['content'])
 news1 = Post.objects.create(author=author1, type_post='NW', title_post=art_news[1]['title'],\
  text_post=art_news[1]['content'])
 post2 = Post.objects.create(author=author2, type_post='AR', title_post=art_news[2]['title'],\

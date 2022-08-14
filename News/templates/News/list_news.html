@@ -15,7 +15,10 @@ All news
     Дата публикации: <i>{{ i.date_creation| date:'d m Y' }}</i>
     <br />
     Текст: <i>{{ i.text_post | truncatechars:20 }}</i>
+    <br />
+    <button><a href="{% url 'news_details' i.pk %}">Читать полностью</a></button>
     <hr />
+
 {% endfor %}
 {% if page_obj.has_previous %}
     <a href="?{% url_replace page=1 %}">1</a>

@@ -1,4 +1,5 @@
 {% extends 'News/default.html' %}
+{% load custom_filters %}
 {% block title %}
 News
 {% endblock title %}
@@ -8,4 +9,26 @@ News
 <br />
 {{ news.text_post}}
 <p align="right"><i>Дата публикации: {{ news.date_creation | date:'d.m.Y' }}</i></p>
+<div align="right">
+    <h3><i>Категории статьи</i>:</h3>
+    {% for i in categories %}
+    {% if request.user in i|get_subscribes %}
+        <b>Отписаться от:</b>
+        <form method="post" action="">
+        {% csrf_token %}
+            <input type="submit" value="{{ i.name_category }}" name="delete_category">
+        </form>
+     <br />
+    {% else %}
+        <b>Подписаться на:</b>
+        <form method="post" action="">
+        {% csrf_token %}
+            <input type="submit" value="{{ i.name_category }}" name="add_category">
+       </form>
+     <br />
+    {% endif %}
+{% endfor %}
+
+</div>
+
 {% endblock content %}
