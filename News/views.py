@@ -7,6 +7,7 @@ from .filters import PostFilter
 from .forms import NewsForm
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
+from .tasks import notify_new_post
 
 
 class NewsList(ListView):
@@ -69,8 +70,8 @@ class NewsCreate(PermissionRequiredMixin, CreateView):
     def form_valid(self, form):
         post = form.save(commit=False)
         post.type_post = 'NW'
+        print(form.instance)
         return super().form_valid(form)
-
 
 
 class ArticleCreate(PermissionRequiredMixin, CreateView):
