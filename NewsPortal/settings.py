@@ -63,6 +63,147 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+
+    'formatters': {
+        'con_debug': {
+            'style': '{',
+            'format': '{asctime} {levelname} {message}'
+        },
+        'con_warning': {
+            'style': '{',
+            'format': '{asctime} {levelname} {message} {pathname}'
+        },
+        'con_error': {
+            'style': '{',
+            'format': '{asctime} {levelname} {message} {pathname} {exc_info}',
+        },
+        'file_general': {
+            'style': '{',
+            'format': '{asctime} {levelname} {module} {message}',
+        },
+        'file_errors': {
+            'style': '{',
+            'format': '{asctime} {levelname} {message} {pathname} {exc_info}',
+        },
+        'file_security': {
+            'style': '{',
+            'format': '{asctime} {levelname} {module} {message}',
+        },
+        'mail': {
+            'style': '{',
+            'format': '{asctime} {levelname} {message} {pathname}',
+        },
+    },
+
+
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+    },
+
+
+    'handlers': {
+        'console_debug': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'con_debug'
+        },
+        'console_warning': {
+            'level': 'WARNING',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'con_warning'
+        },
+        'console_error': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'con_error'
+        },
+        'file_general': {
+            'level': 'INFO',
+            'filters': ['require_debug_false'],
+            'class': 'logging.FileHandler',
+            'formatter': 'file_general',
+            'filename': 'logs/general.log'
+        },
+        'file_errors': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'formatter': 'file_errors',
+            'filename': 'logs/errors.log'
+        },
+        'file_security': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'file_security',
+            'filename': 'logs/security.log'
+        },
+
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+
+
+    'loggers': {
+        'con-debug': {
+            'handlers': ['console_debug'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'con-warning': {
+            'handlers': ['console_warning'],
+            'propagate': True,
+        },
+        'con-error': {
+            'handlers': ['console_error'],
+            'propagate': True,
+        },
+
+        'django': {
+            'handlers': ['console_debug', 'file_general'],
+            'propagate': True,
+        },
+
+        'django.request': {
+            'handlers': ['file_errors', 'mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django.server': {
+            'handlers': ['file_errors', 'mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django.template': {
+            'handlers': ['file_errors'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django.db.backends': {
+            'handlers': ['file_errors'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django.security': {
+            'handlers': ['file_security'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
+
 ROOT_URLCONF = 'NewsPortal.urls'
 
 TEMPLATES = [
@@ -161,6 +302,11 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+ADMINS = [
+    ('Admin', 'caha150886@gmail.com'),
+]
+SERVER_EMAIL = EMAIL_HOST_USER
 
 CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'

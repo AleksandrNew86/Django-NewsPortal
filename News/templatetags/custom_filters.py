@@ -1,4 +1,6 @@
 from django import template
+
+
 register = template.Library()
 
 
@@ -9,4 +11,3 @@ def get_subscribes(value):
     for i in subscribers:
         list_subscribers.append(i)
     return list_subscribers
-
