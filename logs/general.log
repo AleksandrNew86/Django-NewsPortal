@@ -1,0 +1,26 @@
+2022-09-19 20:58:42,475 INFO autoreload Watching for file changes with StatReloader
+2022-09-19 20:58:53,328 WARNING log Not Found: /
+2022-09-19 20:58:56,048 WARNING log Not Found: /favicon.ico
+2022-09-19 21:04:26,289 WARNING log Not Found: /
+2022-09-19 21:08:08,730 WARNING log Not Found: /user/5/edit
+2022-09-19 21:08:14,691 WARNING log Not Found: /user/6/edit
+2022-09-19 21:08:17,643 WARNING log Not Found: /user/7/edit
+2022-09-19 21:08:20,511 WARNING log Not Found: /user/8/edit
+2022-09-19 21:12:05,034 INFO autoreload C:\Users\Alex86\PycharmProjects\Django_project\NewsPortal\NewsPortal\settings.py changed, reloading.
+2022-09-19 21:12:08,311 INFO autoreload Watching for file changes with StatReloader
+2022-09-19 21:12:08,851 WARNING log Not Found: /user/8/edit
+2022-09-19 21:12:08,903 WARNING basehttp "GET /user/8/edit HTTP/1.1" 404 179
+2022-09-19 21:14:53,974 INFO autoreload C:\Users\Alex86\PycharmProjects\Django_project\NewsPortal\NewsPortal\settings.py changed, reloading.
+2022-09-19 21:14:55,972 INFO autoreload Watching for file changes with StatReloader
+2022-09-19 21:14:56,520 WARNING log Not Found: /user/8/edit
+2022-09-19 21:14:58,337 WARNING basehttp "GET /user/8/edit HTTP/1.1" 404 179
+2022-09-19 21:19:35,131 INFO autoreload Watching for file changes with StatReloader
+2022-09-19 21:21:37,625 WARNING log Not Found: /user/8/edit
+2022-09-19 21:21:39,183 WARNING basehttp "GET /user/8/edit HTTP/1.1" 404 179
+2022-09-19 21:23:48,703 INFO autoreload C:\Users\Alex86\PycharmProjects\Django_project\NewsPortal\NewsPortal\settings.py changed, reloading.
+2022-09-19 21:23:51,103 INFO autoreload Watching for file changes with StatReloader
+2022-09-19 21:24:29,539 INFO autoreload C:\Users\Alex86\PycharmProjects\Django_project\NewsPortal\NewsPortal\settings.py changed, reloading.
+2022-09-19 21:24:31,324 INFO autoreload Watching for file changes with StatReloader
+2022-09-19 21:24:31,801 WARNING log Not Found: /user/8/edit
+2022-09-19 21:24:34,062 WARNING basehttp "GET /user/8/edit HTTP/1.1" 404 179
+2022-09-19 21:26:29,075 INFO autoreload C:\Users\Alex86\PycharmProjects\Django_project\NewsPortal\NewsPortal\settings.py changed, reloading.
